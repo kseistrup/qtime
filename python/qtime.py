@@ -6,7 +6,7 @@ QTime — Display time as an English sentence
 ##############################################################################
 # Copyright ©2005-2017 Klaus Alexander Seistrup <klaus@seistrup.dk>
 #
-# Version: 0.2.1 (2017-03-27)
+# Version: 0.2.2 (2017-03-27)
 #
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the Free
@@ -46,7 +46,7 @@ def qtime(utc=False):
         )
         elms.append('to ' if divisions < 0 else 'past ')
 
-    elms.append(the_hours[hours12 or hours])
+    elms.append(the_hours[hours12 or hours % 24])
 
     if hours12 and not divisions:
         elms.append(" o'clock")
