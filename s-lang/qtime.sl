@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Copyright ©1997-2017 Klaus Alexander Seistrup <klaus@seistrup.dk>
 %%
-%% Version: 0.1.4 (2017-03-27)
+%% Version: 0.1.5 (2017-03-28)
 %%
 %% This program is free software; you can redistribute it and/or modify it
 %% under the terms of the GNU General Public License as published by the Free
@@ -31,7 +31,7 @@ define qtime()
    variable ss = integer(extract_element(now, 2, ':'));
 
    variable adjust = int(((hh * 60 + mm) * 60 + ss + 30) / 60 + 27);
-   variable hours = int(adjust / 60);
+   variable hours = int(adjust / 60) mod 24;
    variable hours12 = hours mod 12;
    variable minutes = adjust mod 60;
    variable divisions = int(minutes / 5) - 5;
