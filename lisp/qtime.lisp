@@ -2,7 +2,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Copyright ©2017 Klaus Alexander Seistrup <klaus@seistrup.dk>
 ;;
-;; Version: 0.1.0 (2017-03-27)
+;; Version: 0.1.1 (2017-03-28)
 ;;
 ;; This program is free software; you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by the Free
@@ -33,7 +33,7 @@
    (setq divisions
       (- (truncate minutes 5) 5))
    (setq hours
-      (truncate adjust 60))
+      (rem (truncate adjust 60) 24))
    (setq hours12
       (rem hours 12))
 
