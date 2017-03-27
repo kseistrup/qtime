@@ -1,4 +1,4 @@
-#!/usr/bin/gawk -f
+#!/usr/bin/awk -f
 ## -*- mode: awk; coding: utf-8 -*-
 ##############################################################################
 ## Copyright ©1999-2017 Klaus Alexander Seistrup <klaus@seistrup.dk>
@@ -9,8 +9,7 @@
 ## Created : Friday, 29th January 1999
 ## @(#) $Id: qtime.awk,v 1.2 1999/01/29 12:02:32 kas Exp $
 ##
-## My first program in AWK. :-)  This one requires gawk for the strftime()
-## function, though.
+## My first program in AWK. :-)
 ##
 ## This program is free software; you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by the Free
@@ -59,10 +58,12 @@ BEGIN {
   Up[0] = "to ";
   Up[1] = "";
   Up[2] = "past ";
-  now   = systime();
-  hh    = strftime("%H", now) + 0;
-  mm    = strftime("%M", now) + 0;
-  ss    = strftime("%S", now) + 0;
+
+  srand();
+  now   = srand();
+  hh    = int((now % 86400) / 3600);
+  mm    = int((now % 3600) / 60);
+  ss    = int(now % 60);
   adjm  = int(((hh * 60 + mm) * 60 + ss + 30) / 60) + 27;
   hours = int(adjm / 60) % 12;
   mins  = adjm % 60;
