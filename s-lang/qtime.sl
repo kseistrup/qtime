@@ -1,4 +1,6 @@
 #!/usr/bin/env slsh
+%% -*- mode: slang; coding: utf-8 -*-
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Copyright ©1997-2017 Klaus Alexander Seistrup <klaus@seistrup.dk>
 %%
