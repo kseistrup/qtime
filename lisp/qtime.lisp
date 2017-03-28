@@ -2,7 +2,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Copyright ©2017 Klaus Alexander Seistrup <klaus@seistrup.dk>
 ;;
-;; Version: 0.1.1 (2017-03-28)
+;; Version: 0.1.2 (2017-03-28)
 ;;
 ;; This program is free software; you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by the Free
@@ -28,14 +28,12 @@
                   (* 60 60 24))
                30) 60) 27))
 
+   (setq hours
+      (rem (truncate adjust 60) 12))
    (setq minutes
       (rem adjust 60))
    (setq divisions
       (- (truncate minutes 5) 5))
-   (setq hours
-      (rem (truncate adjust 60) 24))
-   (setq hours12
-      (rem hours 12))
 
    (setq elms
       (list
@@ -48,13 +46,10 @@
             ((< divisions 0) "to ")
             ((> divisions 0) "past ")
             (""))
-         (cond
-            ((= hours 0) "midnight")
-            ((= hours 12) "noon")
-            ((format nil "~r" hours12)))))
+	 (format nil "~r" (if (= hours 0) 12 hours))))
 
    (format nil "~{~A~}"
-      (if (and (= divisions 0) (not (= hours12 0)))
+      (if (= divisions 0)
          (append elms '(" o'clock")) elms)))
 
 ;;; Do you have the time?

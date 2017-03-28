@@ -6,7 +6,7 @@ QTime — Display time as an English sentence
 ##############################################################################
 # Copyright ©2005-2017 Klaus Alexander Seistrup <klaus@seistrup.dk>
 #
-# Version: 0.2.2 (2017-03-27)
+# Version: 0.2.3 (2017-03-28)
 #
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the Free
@@ -25,15 +25,13 @@ from time import (time, localtime, gmtime)
 def qtime(utc=False):
     """Returns current time as an English sentence"""
     the_hours = {
-        0: 'midnight', 1: 'one', 2: 'two', 3: 'three', 4: 'four',
-        5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine',
-        10: 'ten', 11: 'eleven', 12: 'noon'
+        0: 'twelve', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
+        6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten', 11: 'eleven'
     }
     now = gmtime(time()) if utc else localtime(time())
     seconds = (now.tm_hour * 60 + now.tm_min) * 60 + now.tm_sec
     minutes = (seconds + 30) // 60 + 27
     (hours, minutes) = divmod(minutes, 60)
-    hours12 = hours % 12
     divisions = minutes // 5 - 5
     elms = [
         ('nearly ', 'almost ', '', 'just after ', 'after ')[minutes % 5]
@@ -46,9 +44,9 @@ def qtime(utc=False):
         )
         elms.append('to ' if divisions < 0 else 'past ')
 
-    elms.append(the_hours[hours12 or hours % 24])
+    elms.append(the_hours[hours % 12])
 
-    if hours12 and not divisions:
+    if not divisions:
         elms.append(" o'clock")
 
     return ''.join(elms)
