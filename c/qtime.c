@@ -3,9 +3,9 @@
  *
  * QTime -- display time as English sentence.
  *
- * Author  : 1991 Klaus Alexander Seistrup <kseis@magnetic-ink.dk>
- * Created : Sometime back in 1991 on my Amiga 500. :-)
- * @(#) $Id: qtime.c,v 1.3 1999/01/29 11:51:57 kseis Exp $
+ * Author  : 1991 Klaus Alexander Seistrup <klaus@seistrup.dk>
+ * Created : Sometime back in 1991 on my Amiga 500. :)
+ * @(#) $Id: qtime.c,v 1.3 1999/01/29 11:51:57 kas Exp $
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
