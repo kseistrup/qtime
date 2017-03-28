@@ -1,14 +1,11 @@
 /******************************************************************************
- * Copyright © 1991-99 Klaus Alexander Seistrup @ Magnetic Ink, Copenhagen, DK.
+ * Copyright Â©1991-2017 Klaus Alexander Seistrup @ Magnetic Ink, Copenhagen, DK.
  *
  * QTime -- display time as English sentence.
  *
  * Author  : 1991 Klaus Alexander Seistrup <kseis@magnetic-ink.dk>
  * Created : Sometime back in 1991 on my Amiga 500. :-)
  * @(#) $Id: qtime.c,v 1.3 1999/01/29 11:51:57 kseis Exp $
- *
- * NB: remove the "preprocessor" directive at the top of this file if you
- *     want to compile a binary version of qtime!
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -23,9 +20,6 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- *
- * Cint can be found at <URL:http://hpsalo.cern.ch/root/Cint.html>.
- *  EiC can be found at <URL:http://www.geocities.com/SiliconValley/Lab/7326/>.
  ******************************************************************************/
 
 #include <unistd.h>
@@ -39,10 +33,6 @@ static long
 get_secs (void)
 {
   time_t sys_time = time (NULL);
-  /*
-   * The EiC C-interpreter gets localtime() wrong (you get gmtime() instead).
-   * The Cint C-interpreter gets this right.
-   */
   struct tm *sys_date = localtime (&sys_time);
 
   return ((sys_date->tm_hour * 60L) + sys_date->tm_min) * 60L + sys_date->tm_sec;
