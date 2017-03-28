@@ -1,5 +1,3 @@
-#! /usr/bin/env cint
-
 /******************************************************************************
  * Copyright © 1991-99 Klaus Alexander Seistrup @ Magnetic Ink, Copenhagen, DK.
  *
