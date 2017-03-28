@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Copyright ©1997-2017 Klaus Alexander Seistrup <klaus@seistrup.dk>
 %%
-%% Version: 0.1.6 (2017-03-28)
+%% Version: 0.1.7 (2017-03-28)
 %%
 %% This program is free software; you can redistribute it and/or modify it
 %% under the terms of the GNU General Public License as published by the Free
@@ -17,6 +17,12 @@
 %% more details.  <http://gplv3.fsf.org/>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Because sometimes s will be "08" or "09"
+define nn2ii(s)
+{
+   return integer(strcat("1", s)) - 100;
+}
+
 % Returns current local time as an English sentence
 define qtime()
 {
@@ -26,9 +32,10 @@ define qtime()
    variable HR = "twelve:one:two:three:four:five:six:seven:eight:nine:ten:eleven";
 
    variable now = extract_element(strcompress(time(), " "), 3, ' ');
-   variable hh = integer(extract_element(now, 0, ':'));
-   variable mm = integer(extract_element(now, 1, ':'));
-   variable ss = integer(extract_element(now, 2, ':'));
+
+   variable hh = nn2ii(extract_element(now, 0, ':'));
+   variable mm = nn2ii(extract_element(now, 1, ':'));
+   variable ss = nn2ii(extract_element(now, 2, ':'));
 
    variable adjust = int(((hh * 60 + mm) * 60 + ss + 30) / 60 + 27);
    variable hours = int(adjust / 60) mod 12;
