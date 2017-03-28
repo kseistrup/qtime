@@ -16,7 +16,7 @@ ME="${0##*/}"
 MY_APPNAME='qtime'
 MY_AUTHOR='Klaus Alexander Seistrup <klaus@seistrup.dk>'
 MY_REVISION='2017-03-28'
-MY_VERSION="0.1.0 (${MY_REVISION})"
+MY_VERSION="0.1.1 (${MY_REVISION})"
 MY_COPYRIGHT="\
 qtime/${MY_VERSION}
 Copyright © 2017 ${MY_AUTHOR}
@@ -60,19 +60,9 @@ my_copyright () {
 }
 
 str2int () {
-  local str="${1}"
+  local str="1${1}"
 
-  case "${str}" in
-    [1-9][0-9] | [0-9] )
-      echo "${str}"
-    ;;
-    0[0-9] )
-      echo "${str:1}"
-    ;;
-    * )
-      die "Not a number: ‘${str}’"
-    ;;
-  esac
+  echo $((str - 100))
 }
 
 abs () {
