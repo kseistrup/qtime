@@ -15,8 +15,8 @@ ME="${0##*/}"
 
 MY_APPNAME='qtime'
 MY_AUTHOR='Klaus Alexander Seistrup <klaus@seistrup.dk>'
-MY_REVISION='2017-03-28'
-MY_VERSION="0.1.1 (${MY_REVISION})"
+MY_REVISION='2017-03-29'
+MY_VERSION="0.1.2 (${MY_REVISION})"
 MY_COPYRIGHT="\
 qtime/${MY_VERSION}
 Copyright © 2017 ${MY_AUTHOR}
@@ -59,12 +59,6 @@ my_copyright () {
   echo "${MY_COPYRIGHT}"
 }
 
-str2int () {
-  local str="1${1}"
-
-  echo $((str - 100))
-}
-
 abs () {
   local plusminus="${1}"
   [[ "${plusminus}" -lt 0 ]] && plusminus=$((-plusminus))
@@ -80,11 +74,11 @@ my_qtime () {
 
   # HH:MM:SS
   # 01:34:67
-  hh=$(str2int "${now:0:2}")
-  mm=$(str2int "${now:3:2}")
-  ss=$(str2int "${now:6:2}")
+  hh="${now:0:2}"
+  mm="${now:3:2}"
+  ss="${now:6:2}"
 
-  secs=$((((hh * 60 + mm) * 60 + ss) % 86400))
+  secs=$(((("10#${hh}" * 60 + "10#${mm}") * 60 + "10#${ss}") % 86400))
   adjust=$(((secs + 30) / 60 + 27))
   hours=$(((adjust / 60) % 24))
   minutes=$((adjust % 60))
