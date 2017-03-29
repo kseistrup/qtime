@@ -1,4 +1,4 @@
-#!/usr/bin/awk -f
+#!/usr/bin/gawk -f
 ## -*- mode: awk; coding: utf-8 -*-
 ##############################################################################
 ## Copyright ©1999-2017 Klaus Alexander Seistrup <klaus@seistrup.dk>
@@ -58,12 +58,10 @@ BEGIN {
   Up[0] = "to ";
   Up[1] = "";
   Up[2] = "past ";
-
-  srand();
-  now   = srand();
-  hh    = int((now % 86400) / 3600);
-  mm    = int((now % 3600) / 60);
-  ss    = int(now % 60);
+  now   = systime();
+  hh    = strftime("%H", now) + 0;
+  mm    = strftime("%M", now) + 0;
+  ss    = strftime("%S", now) + 0;
   adjm  = int(((hh * 60 + mm) * 60 + ss + 30) / 60) + 27;
   hours = int(adjm / 60) % 12;
   mins  = adjm % 60;
