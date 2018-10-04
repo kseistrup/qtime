@@ -1,0 +1,51 @@
+#!/usr/bin/env fish
+
+##############################################################################
+# Copyright ©1997-2018 Klaus Alexander Seistrup <klaus@seistrup.dk>          #
+#                                                                            #
+# Version: 2018.10.04-1                                                      #
+#                                                                            #
+# This program is free software; you can redistribute it and/or modify it    #
+# under the terms of the GNU General Public License as published by the Free #
+# Software Foundation; either version 3 of the License, or (at your option)  #
+# any later version.                                                         #
+#                                                                            #
+# This program is distributed in the hope that it will be useful, but with-  #
+# out any warranty; without even the implied warranty of merchantability or  #
+# fitness for a particular purpose. See the GNU General Public License for   #
+# more details. <http://gplv3.fsf.org/>                                      #
+##############################################################################
+
+function qtime_fish
+   set now (date '+%T' | string split ':')
+   set hh $now[1]
+   set mm $now[2]
+   set ss $now[3]
+   set seconds   (math "($hh * 60 + $mm) * 60 + $ss")
+   set minutes   (math "($seconds + 30) / 60 + 27")
+   set hours     (math "$minutes / 60")
+   set minutes   (math "$minutes % 60")
+   set divisions (math "$minutes / 5 - 5")
+   set nearly 'nearly ' 'almost ' '' 'just after ' 'after '
+   set elms $nearly[(math "$minutes % 5 + 1")]
+   if test $divisions -ne 0
+      set fives 'five' 'ten' 'a quarter' 'twenty' 'twenty-five' 'half'
+      test $divisions -lt 0
+         and set elms $elms $fives[(string sub -s 2 -- $divisions)] ' to '
+	  or set elms $elms $fives[$divisions] ' past '
+   end
+   set the_hours twelve one two three four five six seven eight nine ten eleven
+   set elms $elms $the_hours[(math "($hours % 12) + 1")]
+   test $divisions -eq 0
+      and set elms $elms " o'clock"
+   string join '' $elms
+end
+
+function main
+   # Do you have the time?
+   echo "It's" (qtime_fish).
+end
+
+main $argv
+
+# eof
