@@ -15,17 +15,17 @@ ME="${0##*/}"
 
 MY_APPNAME='qtime'
 MY_AUTHOR='Klaus Alexander Seistrup <klaus@seistrup.dk>'
-MY_REVISION='2017-03-29'
-MY_VERSION="0.1.2 (${MY_REVISION})"
+MY_REVISION='1'
+MY_VERSION="2018.10.04-$MY_REVISION"
 MY_COPYRIGHT="\
-qtime/${MY_VERSION}
-Copyright © 2017 ${MY_AUTHOR}
+qtime/$MY_VERSION
+Copyright © 2017-18 $MY_AUTHOR
 
 This is free software; see the source for copying conditions. There is no
 warranty; not even for merchantability or fitness for a particular purpose.\
 "
 MY_HELP="
-Usage: ${ME} [OPTIONS]
+Usage: $ME [OPTIONS]
 
 options are:
   -h, --help ........ display this help and exit
@@ -40,29 +40,29 @@ MY_HH=(
 )
 
 die () {
-  [[ -n "${1}" ]] && {
-    echo "${ME}:" "${@}" >&2
+  [[ -n "$1" ]] && {
+    echo "$ME:" "$@" >&2
     exit 1
   }
   exit 0
 }
 
 my_help () {
-  echo "${MY_HELP}"
+  echo "$MY_HELP"
 }
 
 my_version () {
-  echo "${MY_APPNAME}/${MY_VERSION}"
+  echo "$MY_APPNAME/$MY_VERSION"
 }
 
 my_copyright () {
-  echo "${MY_COPYRIGHT}"
+  echo "$MY_COPYRIGHT"
 }
 
 abs () {
-  local plusminus="${1}"
-  [[ "${plusminus}" -lt 0 ]] && plusminus=$((-plusminus))
-  echo "${plusminus}"
+  local plusminus="$1"
+  [[ "$plusminus" -lt 0 ]] && plusminus=$((-plusminus))
+  echo "$plusminus"
 }
 
 my_qtime () {
@@ -102,7 +102,7 @@ my_qtime () {
 }
 
 main () {
-  case "${1}" in
+  case "$1" in
     -h | --help )
       my_help
     ;;
@@ -113,7 +113,7 @@ main () {
       my_copyright
     ;;
     '')
-      : pass
+      my_qtime
     ;;
     * )
       my_help >&2
@@ -121,11 +121,9 @@ main () {
     ;;
   esac
 
-  my_qtime
-
   exit 0
 }
 
-main "${@}"
+main "$@"
 
 # eof
