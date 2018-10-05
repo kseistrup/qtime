@@ -30,9 +30,13 @@ function qtime_fish
    set elms $nearly[(math "$minutes % 5 + 1")]
    if test $divisions -ne 0
       set fives 'five' 'ten' 'a quarter' 'twenty' 'twenty-five' 'half'
-      test $divisions -lt 0
-         and set elms $elms $fives[(string sub -s 2 -- $divisions)] ' to '
-	  or set elms $elms $fives[$divisions] ' past '
+      if test $divisions -lt 0    # there's no abs(), but …
+         set fives $fives[-1..1]  # … we can reverse the list
+	 set top ' to '
+      else
+         set top ' past '
+      end
+      set elms $elms $fives[$divisions] $top
    end
    set the_hours twelve one two three four five six seven eight nine ten eleven
    set elms $elms $the_hours[(math "$hours % 12 + 1")]
