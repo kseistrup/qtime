@@ -18,10 +18,7 @@
 
 function qtime_fish
    set now (date '+%T' | string split ':')
-   set hh $now[1]
-   set mm $now[2]
-   set ss $now[3]
-   set seconds   (math "($hh * 60 + $mm) * 60 + $ss")
+   set seconds   (math "($now[1] * 60 + $now[2]) * 60 + $now[3]")
    set minutes   (math "($seconds + 30) / 60 + 27")
    set hours     (math "$minutes / 60")
    set minutes   (math "$minutes % 60")
