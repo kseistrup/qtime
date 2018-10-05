@@ -3,7 +3,7 @@
 ##############################################################################
 # Copyright ©1997-2018 Klaus Alexander Seistrup <klaus@seistrup.dk>          #
 #                                                                            #
-# Version: 2018.10.04-1                                                      #
+# Version: 2018.10.05-1                                                      #
 #                                                                            #
 # This program is free software; you can redistribute it and/or modify it    #
 # under the terms of the GNU General Public License as published by the Free #
@@ -35,7 +35,7 @@ function qtime_fish
 	  or set elms $elms $fives[$divisions] ' past '
    end
    set the_hours twelve one two three four five six seven eight nine ten eleven
-   set elms $elms $the_hours[(math "($hours % 12) + 1")]
+   set elms $elms $the_hours[(math "$hours % 12 + 1")]
    test $divisions -eq 0
       and set elms $elms " o'clock"
    string join '' $elms
