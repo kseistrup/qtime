@@ -1,9 +1,9 @@
 #!/usr/bin/env fish
 
 ##############################################################################
-# Copyright ©1997-2018 Klaus Alexander Seistrup <klaus@seistrup.dk>          #
+# Copyright ©1997-2019 Klaus Alexander Seistrup <klaus@seistrup.dk>          #
 #                                                                            #
-# Version: 2018.10.05-1                                                      #
+# Version: 2019.01.13-1                                                      #
 #                                                                            #
 # This program is free software; you can redistribute it and/or modify it    #
 # under the terms of the GNU General Public License as published by the Free #
@@ -17,6 +17,12 @@
 ##############################################################################
 
 function qtime_fish
+   # fish3 math() defaults to floating point :(
+   if test (string split '.' $version)[1] -ge 3
+      function math
+         builtin math --scale=0 $argv
+      end
+   end
    set now (date '+%T' | string split ':')
    set seconds   (math "($now[1] * 60 + $now[2]) * 60 + $now[3]")
    set minutes   (math "($seconds + 30) / 60 + 27")
